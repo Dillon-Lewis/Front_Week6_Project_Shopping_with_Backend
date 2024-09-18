@@ -45,10 +45,12 @@ orders_schema = OrderSchema(many= True)
 product_schema = ProductSchema()
 products_schema = ProductSchema(many= True)
 
-db_name = "e_commerce_db"
-user = "root"
-password = "1126"
-host = "localhost"
+db_name = "postgresql_ecomm"
+user = "postgresql_ecomm_user"
+password = "S8SUMgiNRn7PnPFKslYaShI7kpD01WGQ"
+host = "dpg-crl1uvt6l47c73fq68kg-a"
+
+# postgresql://postgresql_ecomm_user:S8SUMgiNRn7PnPFKslYaShI7kpD01WGQ@dpg-crl1uvt6l47c73fq68kg-a/postgresql_ecomm
 
 def get_db_connection():
     try:
@@ -321,7 +323,7 @@ def remove_product(id):
             return jsonify({"error": "Product not found"}), 404
         
         query = "DELETE FROM products WHERE id = %s"
-        cursor.execute(query, product)
+        cursor.execute(query, (product[0]))
         conn.commit()
         return jsonify({"message": "Customer removed successfully"}), 200
 
